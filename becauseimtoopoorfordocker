@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+
+import create_container as cc 
+import sys 
+
+length = len(sys.argv)
+
+HELP = """
+
+usage: becauseimtoopoorfordocker [-new] [name]
+usage: becauseimtoopoorfordocker [-runin] [file_to_run] [container_name]
+usage: becauseimtoopoorfordocker [-startcmd] [container_name]
+
+"""
+
+def create_command_line():
+    while True:
+        cmd = input("You_Are_Poor$ >> ")
+        cc.run_command_in_container(cmd)
+        print("\n")
+
+def main():
+    if length == 1:
+        print(HELP)
+
+    elif sys.argv[1] == '-new':
+        if length == 2:
+            print(HELP)
+            return None
+        cc.createc(sys.argv[2])
+
+    elif sys.argv[1] == '-runin':
+        if length <= 3:
+            print(HELP)
+            return None
+    
+        
+
+if __name__ == '__main__':
+    main()
