@@ -2,6 +2,7 @@
 
 import create_container as cc 
 import sys 
+import os
 
 length = len(sys.argv)
 
@@ -9,14 +10,18 @@ HELP = """
 
 usage: becauseimtoopoorfordocker [-new] [name]
 usage: becauseimtoopoorfordocker [-runin] [file_to_run] [container_name]
-usage: becauseimtoopoorfordocker [-startcmd] [container_name]
+usage: becauseimtoopoorfordocker [-cmdline] [container_name]
+
+NOTE:
+All file/folder parameters must be given as paths not simply just the name of the file/folder.
+All files that are being run by the command must be executable.
 
 """
 
-def create_command_line():
+def create_command_line(container):
     while True:
         cmd = input("You_Are_Poor$ >> ")
-        cc.run_command_in_container(cmd)
+        cc.run_command_in_container(cmd, container)
         print("\n")
 
 def main():
@@ -24,7 +29,7 @@ def main():
         print(HELP)
 
     elif sys.argv[1] == '-new':
-        if length == 2:
+        if length <= 2:
             print(HELP)
             return None
         cc.createc(sys.argv[2])
@@ -33,8 +38,13 @@ def main():
         if length <= 3:
             print(HELP)
             return None
-    
-        
+        cc.run_command_in_container(sys.argv[2], sys.argv)
+
+    elif sys.argv[1] == '-cmdline':
+        if length <= 2:
+            print(HELP)
+            return None
+        create_command_line(sys.argv[2])
 
 if __name__ == '__main__':
     main()
