@@ -1,2 +1,2 @@
 # becauseimtoopoorfordocker
-A low-quality replacement for 
+A low-quality replacement for docker
